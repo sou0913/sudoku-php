@@ -3,16 +3,14 @@
 require_once 'Table.php';
 require_once 'Point.php';
 require_once 'Utils.php';
+require_once 'Mask.php';
 
 const Numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function dfs($table, $point)
 {
     if ($point->isFinished()) {
-        foreach($table->base as $row) {
-            echo implode(' ', $row) . PHP_EOL;
-        }
-        return true;
+        return $table->base;
     };
     $seed = rand();
     $numbers = Utils\shuffle_with_seed(Numbers, $seed);
@@ -26,23 +24,18 @@ function dfs($table, $point)
             continue;
         }
     }
-    // foreach($table->base as $row) {
-    //     echo implode(' ', $row) . PHP_EOL;
-    // }
     return false;
 }
-// 1 2 3 4 5 6 7 8 9
-// 4 5 6 7 8 9 1 2 3
-// 7 8 9 1 2 3 4 5 6
-// 2 1 4 3 6 5 8 9 7
-// 3 6 5 8 9 7 2 1 4
-// 8 9 7 2 1 4 3 6 5
-// 5 3 1 6 4 2 9 7 8
-// 6 4 2 9 7 8 5 3 1
-// 9 7 8 5 3 1 6 4 2
 
 $table = new Table;
 $point = new Point;
 
 $result = dfs($table, $point);
-var_dump($result);
+
+echo "Answer" . PHP_EOL;
+foreach($result as $row) {
+    echo implode(' ', $row) . PHP_EOL;
+}
+
+echo "Question" . PHP_EOL;
+\Mask\pretty_print($result);

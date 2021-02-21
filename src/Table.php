@@ -7,10 +7,14 @@ class Table
 {
     public $base;
 
+    private $height;
+    private $width;
     private $validator;
 
     public function __construct($height = 9, $width = 9)
     {
+        $this->height = $height;
+        $this->width = $width;
         $this->base = array_fill(0, $height, array_fill(0, $width, 0));
         $this->validator = new Validator;
     }
@@ -19,6 +23,11 @@ class Table
     public function copy(): Table
     {
         return clone $this;
+    }
+
+    public function size() : int
+    {
+        return $this->height * $this->width;
     }
 
     public function set($point, $number)
