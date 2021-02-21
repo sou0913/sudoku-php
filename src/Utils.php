@@ -26,3 +26,15 @@ function array_flatten($arr) : array
     });
     return $v;
 }
+
+function shuffle_with_seed($arr, $seed) : array
+{
+    mt_srand($seed);
+    $size = count($arr);
+    $copy = $arr;
+    for ($i = 0; $i < $size; ++$i) {
+        [$chunk] = array_splice($copy, mt_rand(0, $size-1), 1);
+        array_push($copy, $chunk);
+    }
+    return $copy;
+}
